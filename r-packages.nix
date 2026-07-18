@@ -565,9 +565,7 @@ in
     meta = { broken = true; }; # missing: libpq
   });
 
-  Signac = prev.Signac.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.zlib.dev ];
-  });
+  # Signac override moved to missing R deps section below
 
   spaMM = prev.spaMM.overrideAttrs (_: {
     meta = { broken = true; }; # missing: gsl
@@ -603,8 +601,8 @@ in
   # packagesRequiringHome
   # --------------------------------------------------------------------------
 
-  PSCBS = prev.PSCBS.overrideAttrs (old: {
-    preInstall = (old.preInstall or "") + "export HOME=$TMPDIR";
+  PSCBS = prev.PSCBS.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: aroma_light, DNAcopy
   });
 
   repmis = prev.repmis.overrideAttrs (old: {
@@ -771,5 +769,105 @@ in
       PKGCONFIG_CFLAGS = "-I${pkgs.openssl.dev}/include";
       PKGCONFIG_LIBS = "-Wl,-rpath,${lib.getLib pkgs.openssl}/lib -L${lib.getLib pkgs.openssl}/lib -lssl -lcrypto";
     };
+  });
+
+  # --------------------------------------------------------------------------
+  # Packages with missing R-level dependencies (not in package set)
+  # --------------------------------------------------------------------------
+
+  alakazam = prev.alakazam.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: Biostrings, GenomicAlignments, IRanges
+  });
+
+  biomartr = prev.biomartr.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: biomaRt, Biostrings
+  });
+
+  Boruta = prev.Boruta.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: fru
+  });
+
+  bssm = prev.bssm.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: diagis, ramcmc
+  });
+
+  CodeDepends = prev.CodeDepends.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: graph
+  });
+
+  CVXR = prev.CVXR.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: highs
+  });
+
+  detectseparation = prev.detectseparation.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: ROI_plugin_lpsolve
+  });
+
+  FSA = prev.FSA.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: dunn_test, FlexParamCurve
+  });
+
+  genieclust = prev.genieclust.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: deadwood
+  });
+
+  ggm = prev.ggm.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: graph
+  });
+
+  isva = prev.isva.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: qvalue
+  });
+
+  logistf = prev.logistf.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: formula_tools
+  });
+
+  meta = prev.meta.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: metabook
+  });
+
+  mutoss = prev.mutoss.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: multtest
+  });
+
+  NMF = prev.NMF.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: Biobase
+  });
+
+  RandomFields = prev.RandomFields.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: RandomFieldsUtils
+  });
+
+  restfulr = prev.restfulr.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: S4Vectors
+  });
+
+  Rfast = prev.Rfast.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: zigg
+  });
+
+  samr = prev.samr.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: impute
+  });
+
+  Signac = prev.Signac.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: BiocGenerics, GenomeInfoDb, GenomicRanges, IRanges, Rsamtools, S4Vectors, sparseMatrixStats
+  });
+
+  tune = prev.tune.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: GauPro
+  });
+
+  vcdExtra = prev.vcdExtra.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: gt, webshot2
+  });
+
+  VIM = prev.VIM.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R dep: mlr3pipelines
+  });
+
+  WGCNA = prev.WGCNA.overrideAttrs (_: {
+    meta = { broken = true; }; # missing R deps: impute, preprocessCore
   });
 }
