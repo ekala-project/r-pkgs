@@ -20,13 +20,9 @@ in
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.which ];
   });
 
-  arrow = prev.arrow.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: arrow-cpp (null in corepkgs)
-  });
+  arrow = throw "arrow: missing: arrow-cpp (null in corepkgs)";
 
-  audio = prev.audio.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: portaudio
-  });
+  audio = throw "audio: missing: portaudio";
 
   bio3d = prev.bio3d.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.zlib ];
@@ -70,17 +66,11 @@ in
     doCheck = false;
   });
 
-  exactextractr = prev.exactextractr.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: geos
-  });
+  exactextractr = throw "exactextractr: missing: geos";
 
-  fftw = prev.fftw.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: fftw
-  });
+  fftw = throw "fftw: missing: fftw";
 
-  fftwtools = prev.fftwtools.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: fftw
-  });
+  fftwtools = throw "fftwtools: missing: fftw";
 
   Formula = prev.Formula.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.gmp ];
@@ -118,9 +108,7 @@ in
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.gmp.dev ];
   });
 
-  gsl = prev.gsl.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: gsl
-  });
+  gsl = throw "gsl: missing: gsl";
 
   gert = prev.gert.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libgit2 ];
@@ -157,13 +145,9 @@ in
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.gmp.dev ];
   });
 
-  lwgeom = prev.lwgeom.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: proj, geos
-  });
+  lwgeom = throw "lwgeom: missing: proj, geos";
 
-  magick = prev.magick.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: imagemagick (null in corepkgs)
-  });
+  magick = throw "magick: missing: imagemagick (null in corepkgs)";
 
   ModelMetrics = prev.ModelMetrics.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or [])
@@ -174,25 +158,15 @@ in
     };
   });
 
-  mvabund = prev.mvabund.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: gsl
-  });
+  mvabund = throw "mvabund: missing: gsl";
 
-  nanonext = prev.nanonext.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: mbedtls, nng
-  });
+  nanonext = throw "nanonext: missing: mbedtls, nng";
 
-  ncdf4 = prev.ncdf4.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: netcdf
-  });
+  ncdf4 = throw "ncdf4: missing: netcdf";
 
-  nloptr = prev.nloptr.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: nlopt
-  });
+  nloptr = throw "nloptr: missing: nlopt";
 
-  odbc = prev.odbc.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: unixODBC (null in corepkgs)
-  });
+  odbc = throw "odbc: missing: unixODBC (null in corepkgs)";
 
   pak = prev.pak.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.curl.dev ];
@@ -205,13 +179,9 @@ in
     '';
   });
 
-  pander = prev.pander.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: pandoc
-  });
+  pander = throw "pander: missing: pandoc";
 
-  pbdMPI = prev.pbdMPI.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: mpi (null in corepkgs)
-  });
+  pbdMPI = throw "pbdMPI: missing: mpi (null in corepkgs)";
 
   pbdZMQ = prev.pbdZMQ.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or [])
@@ -221,9 +191,7 @@ in
       ++ [ pkgs.zeromq ];
   });
 
-  pdftools = prev.pdftools.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: poppler (null in corepkgs)
-  });
+  pdftools = throw "pdftools: missing: poppler (null in corepkgs)";
 
   phytools = prev.phytools.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.which ];
@@ -244,13 +212,9 @@ in
     '';
   });
 
-  RcppGSL = prev.RcppGSL.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: gsl
-  });
+  RcppGSL = throw "RcppGSL: missing: gsl";
 
-  RcppZiggurat = prev.RcppZiggurat.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: gsl
-  });
+  RcppZiggurat = throw "RcppZiggurat: missing: gsl";
 
   redux = prev.redux.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
@@ -261,21 +225,13 @@ in
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.which ];
   });
 
-  rgdal = prev.rgdal.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: proj
-  });
+  rgdal = throw "rgdal: missing: proj";
 
-  rgeos = prev.rgeos.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: geos
-  });
+  rgeos = throw "rgeos: missing: geos";
 
-  Rglpk = prev.Rglpk.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: glpk
-  });
+  Rglpk = throw "Rglpk: missing: glpk";
 
-  rjags = prev.rjags.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: jags
-  });
+  rjags = throw "rjags: missing: jags";
 
   rJava = prev.rJava.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
@@ -309,25 +265,15 @@ in
     ];
   });
 
-  Rmpi = prev.Rmpi.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: prrte
-  });
+  Rmpi = throw "Rmpi: missing: prrte";
 
-  RMySQL = prev.RMySQL.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: libmysqlclient
-  });
+  RMySQL = throw "RMySQL: missing: libmysqlclient";
 
-  RNetCDF = prev.RNetCDF.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: netcdf, udunits
-  });
+  RNetCDF = throw "RNetCDF: missing: netcdf, udunits";
 
-  RODBC = prev.RODBC.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: libiodbc
-  });
+  RODBC = throw "RODBC: missing: libiodbc";
 
-  RPostgreSQL = prev.RPostgreSQL.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: libpq
-  });
+  RPostgreSQL = throw "RPostgreSQL: missing: libpq";
 
   RProtoBuf = prev.RProtoBuf.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
@@ -338,13 +284,9 @@ in
     configureFlags = [ "ac_cv_prog_cxx_cxx11=" ];
   });
 
-  rsvg = prev.rsvg.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: librsvg
-  });
+  rsvg = throw "rsvg: missing: librsvg";
 
-  runjags = prev.runjags.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: jags
-  });
+  runjags = throw "runjags: missing: jags";
 
   s2 = prev.s2.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
@@ -362,9 +304,7 @@ in
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.zlib.dev ];
   });
 
-  sf = prev.sf.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: proj, geos
-  });
+  sf = throw "sf: missing: proj, geos";
 
   showtext = prev.showtext.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
@@ -403,13 +343,9 @@ in
     preConfigure = "patchShebangs configure";
   });
 
-  terra = prev.terra.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: proj, geos, netcdf
-  });
+  terra = throw "terra: missing: proj, geos, netcdf";
 
-  tesseract = prev.tesseract.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: tesseract, leptonica
-  });
+  tesseract = throw "tesseract: missing: tesseract, leptonica";
 
   textshaping = prev.textshaping.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
@@ -435,17 +371,11 @@ in
     ]);
   });
 
-  topicmodels = prev.topicmodels.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: gsl
-  });
+  topicmodels = throw "topicmodels: missing: gsl";
 
-  udunits2 = prev.udunits2.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: udunits
-  });
+  udunits2 = throw "udunits2: missing: udunits";
 
-  units = prev.units.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: udunits
-  });
+  units = throw "units: missing: udunits";
 
   vdiffr = prev.vdiffr.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libpng.dev ];
@@ -456,9 +386,7 @@ in
     buildInputs = (old.buildInputs or []) ++ [ pkgs.libwebp ];
   });
 
-  XML = prev.XML.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: xmlsec
-  });
+  XML = throw "XML: missing: xmlsec";
 
   xml2 = prev.xml2.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or [])
@@ -470,9 +398,7 @@ in
     '';
   });
 
-  qqconf = prev.qqconf.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: fftw
-  });
+  qqconf = throw "qqconf: missing: fftw";
 
   ragg = prev.ragg.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
@@ -506,9 +432,7 @@ in
     buildInputs = (old.buildInputs or []) ++ [ pkgs.zlib.dev ];
   });
 
-  igraph = prev.igraph.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: glpk
-  });
+  igraph = throw "igraph: missing: glpk";
 
   openssl = prev.openssl.overrideAttrs (old: {
     buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
@@ -521,17 +445,11 @@ in
     };
   });
 
-  PoissonBinomial = prev.PoissonBinomial.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: fftw
-  });
+  PoissonBinomial = throw "PoissonBinomial: missing: fftw";
 
-  proj4 = prev.proj4.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: proj
-  });
+  proj4 = throw "proj4: missing: proj";
 
-  PROJ = prev.PROJ.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: proj
-  });
+  PROJ = throw "PROJ: missing: proj";
 
   qpdf = prev.qpdf.overrideAttrs (old: {
     buildInputs = (old.buildInputs or []) ++ (with pkgs; [
@@ -557,19 +475,13 @@ in
     };
   });
 
-  RMariaDB = prev.RMariaDB.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: libmysqlclient
-  });
+  RMariaDB = throw "RMariaDB: missing: libmysqlclient";
 
-  RPostgres = prev.RPostgres.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: libpq
-  });
+  RPostgres = throw "RPostgres: missing: libpq";
 
   # Signac override moved to missing R deps section below
 
-  spaMM = prev.spaMM.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: gsl
-  });
+  spaMM = throw "spaMM: missing: gsl";
 
   tcltk2 = prev.tcltk2.overrideAttrs (old: {
     buildInputs = (old.buildInputs or []) ++ (with pkgs; [
@@ -601,9 +513,7 @@ in
   # packagesRequiringHome
   # --------------------------------------------------------------------------
 
-  PSCBS = prev.PSCBS.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: aroma_light, DNAcopy
-  });
+  PSCBS = throw "PSCBS: missing R deps: aroma_light, DNAcopy";
 
   repmis = prev.repmis.overrideAttrs (old: {
     preInstall = (old.preInstall or "") + "export HOME=$TMPDIR";
@@ -638,7 +548,7 @@ in
   # brokenPackages
   # --------------------------------------------------------------------------
 
-  av = prev.av.overrideAttrs (_: { meta = { broken = true; }; });
+  av = throw "av: missing ffmpeg";
 
   # --------------------------------------------------------------------------
   # otherOverrides (patchShebangs, env vars, configure flags, etc.)
@@ -661,9 +571,7 @@ in
     enableParallelBuilding = false;
   });
 
-  hdf5r = prev.hdf5r.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: Rhdf5lib.hdf5
-  });
+  hdf5r = throw "hdf5r: missing: Rhdf5lib.hdf5";
 
   httr2 = prev.httr2.overrideAttrs (_: {
     preConfigure = "patchShebangs configure";
@@ -706,9 +614,7 @@ in
     patchPhase = "patchShebangs configure";
   });
 
-  quarto = prev.quarto.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: quarto
-  });
+  quarto = throw "quarto: missing: quarto";
 
   RcppArmadillo = prev.RcppArmadillo.overrideAttrs (_: {
     patchPhase = "patchShebangs configure";
@@ -718,17 +624,13 @@ in
     preConfigure = "patchShebangs configure";
   });
 
-  redland = prev.redland.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: redland, librdf_raptor2, librdf_rasqal
-  });
+  redland = throw "redland: missing: redland, librdf_raptor2, librdf_rasqal";
 
   rlang = prev.rlang.overrideAttrs (_: {
     preConfigure = "patchShebangs configure";
   });
 
-  rmarkdown = prev.rmarkdown.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: pandoc
-  });
+  rmarkdown = throw "rmarkdown: missing: pandoc";
 
   rpf = prev.rpf.overrideAttrs (_: {
     patchPhase = "patchShebangs configure";
@@ -756,9 +658,7 @@ in
     buildInputs = (old.buildInputs or []) ++ [ pkgs.libsodium.dev ];
   });
 
-  V8 = prev.V8.overrideAttrs (_: {
-    meta = { broken = true; }; # missing: nodejs-slim_22
-  });
+  V8 = throw "V8: missing: nodejs-slim_22";
 
   webfakes = prev.webfakes.overrideAttrs (_: {
     postPatch = "patchShebangs configure";
@@ -775,99 +675,51 @@ in
   # Packages with missing R-level dependencies (not in package set)
   # --------------------------------------------------------------------------
 
-  alakazam = prev.alakazam.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: Biostrings, GenomicAlignments, IRanges
-  });
+  alakazam = throw "alakazam: missing R deps: Biostrings, GenomicAlignments, IRanges";
 
-  biomartr = prev.biomartr.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: biomaRt, Biostrings
-  });
+  biomartr = throw "biomartr: missing R deps: biomaRt, Biostrings";
 
-  Boruta = prev.Boruta.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: fru
-  });
+  Boruta = throw "Boruta: missing R dep: fru";
 
-  bssm = prev.bssm.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: diagis, ramcmc
-  });
+  bssm = throw "bssm: missing R deps: diagis, ramcmc";
 
-  CodeDepends = prev.CodeDepends.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: graph
-  });
+  CodeDepends = throw "CodeDepends: missing R dep: graph";
 
-  CVXR = prev.CVXR.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: highs
-  });
+  CVXR = throw "CVXR: missing R dep: highs";
 
-  detectseparation = prev.detectseparation.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: ROI_plugin_lpsolve
-  });
+  detectseparation = throw "detectseparation: missing R dep: ROI_plugin_lpsolve";
 
-  FSA = prev.FSA.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: dunn_test, FlexParamCurve
-  });
+  FSA = throw "FSA: missing R deps: dunn_test, FlexParamCurve";
 
-  genieclust = prev.genieclust.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: deadwood
-  });
+  genieclust = throw "genieclust: missing R dep: deadwood";
 
-  ggm = prev.ggm.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: graph
-  });
+  ggm = throw "ggm: missing R dep: graph";
 
-  isva = prev.isva.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: qvalue
-  });
+  isva = throw "isva: missing R dep: qvalue";
 
-  logistf = prev.logistf.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: formula_tools
-  });
+  logistf = throw "logistf: missing R dep: formula_tools";
 
-  meta = prev.meta.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: metabook
-  });
+  meta = throw "meta: missing R dep: metabook";
 
-  mutoss = prev.mutoss.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: multtest
-  });
+  mutoss = throw "mutoss: missing R dep: multtest";
 
-  NMF = prev.NMF.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: Biobase
-  });
+  NMF = throw "NMF: missing R dep: Biobase";
 
-  RandomFields = prev.RandomFields.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: RandomFieldsUtils
-  });
+  RandomFields = throw "RandomFields: missing R dep: RandomFieldsUtils";
 
-  restfulr = prev.restfulr.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: S4Vectors
-  });
+  restfulr = throw "restfulr: missing R dep: S4Vectors";
 
-  Rfast = prev.Rfast.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: zigg
-  });
+  Rfast = throw "Rfast: missing R dep: zigg";
 
-  samr = prev.samr.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: impute
-  });
+  samr = throw "samr: missing R dep: impute";
 
-  Signac = prev.Signac.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: BiocGenerics, GenomeInfoDb, GenomicRanges, IRanges, Rsamtools, S4Vectors, sparseMatrixStats
-  });
+  Signac = throw "Signac: missing R deps: BiocGenerics, GenomeInfoDb, GenomicRanges, IRanges, Rsamtools, S4Vectors, sparseMatrixStats";
 
-  tune = prev.tune.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: GauPro
-  });
+  tune = throw "tune: missing R dep: GauPro";
 
-  vcdExtra = prev.vcdExtra.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: gt, webshot2
-  });
+  vcdExtra = throw "vcdExtra: missing R deps: gt, webshot2";
 
-  VIM = prev.VIM.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R dep: mlr3pipelines
-  });
+  VIM = throw "VIM: missing R dep: mlr3pipelines";
 
-  WGCNA = prev.WGCNA.overrideAttrs (_: {
-    meta = { broken = true; }; # missing R deps: impute, preprocessCore
-  });
+  WGCNA = throw "WGCNA: missing R deps: impute, preprocessCore";
 }
