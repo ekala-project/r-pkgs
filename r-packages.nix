@@ -278,7 +278,7 @@ in
   RProtoBuf = prev.RProtoBuf.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
       protobuf
-      abseil-cpp.dev
+      (lib.getDev abseil-cpp)
     ]);
     buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
     configureFlags = [ "ac_cv_prog_cxx_cxx11=" ];
