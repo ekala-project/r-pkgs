@@ -276,11 +276,11 @@ in
   RPostgreSQL = throw "RPostgreSQL: missing: libpq";
 
   RProtoBuf = prev.RProtoBuf.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
+    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
       protobuf
       (lib.getDev abseil-cpp)
     ]);
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
     configureFlags = [ "ac_cv_prog_cxx_cxx11=" ];
   });
 
