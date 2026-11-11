@@ -17,7 +17,7 @@ in
   # --------------------------------------------------------------------------
 
   animation = prev.animation.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.which ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.which ];
   });
 
   arrow = throw "arrow: missing: arrow-cpp (null in corepkgs)";
@@ -25,41 +25,47 @@ in
   audio = throw "audio: missing: portaudio";
 
   bio3d = prev.bio3d.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.zlib ];
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.zlib.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.zlib ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.zlib.dev ];
   });
 
   Cairo = prev.Cairo.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      libtiff
-      libjpeg
-      cairo.dev
-      libxt.dev
-      fontconfig.lib
-    ]);
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
-    env = (old.env or {}) // {
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        libtiff
+        libjpeg
+        cairo.dev
+        libxt.dev
+        fontconfig.lib
+      ]);
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    env = (old.env or { }) // {
       NIX_LDFLAGS = "-lfontconfig";
     };
   });
 
   clarabel = prev.clarabel.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.cargo ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.cargo ];
     postPatch = ''
       patchShebangs configure
     '';
   });
 
   curl = prev.curl.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.curl.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.curl.dev ];
     preConfigure = "patchShebangs configure";
   });
 
   data_table = prev.data_table.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [])
-      ++ [ pkgs.pkg-config pkgs.zlib.dev ]
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ [
+        pkgs.pkg-config
+        pkgs.zlib.dev
+      ]
       ++ lib.optional stdenv.hostPlatform.isDarwin pkgs.llvmPackages.openmp;
-    env = (old.env or {}) // {
+    env = (old.env or { }) // {
       NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -fopenmp";
     };
     patchPhase = "patchShebangs configure";
@@ -73,76 +79,89 @@ in
   fftwtools = throw "fftwtools: missing: fftw";
 
   Formula = prev.Formula.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.gmp ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.gmp ];
   });
 
   gdtools = prev.gdtools.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [])
-      ++ (with pkgs; [ cairo.dev fontconfig.lib freetype.dev ])
-      ++ lib.optionals stdenv.hostPlatform.isDarwin (with pkgs; [ expat libxdmcp ]);
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        cairo.dev
+        fontconfig.lib
+        freetype.dev
+      ])
+      ++ lib.optionals stdenv.hostPlatform.isDarwin (
+        with pkgs;
+        [
+          expat
+          libxdmcp
+        ]
+      );
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pkg-config ];
     preConfigure = ''
       patchShebangs configure
     '';
-    env = (old.env or {}) // {
+    env = (old.env or { }) // {
       NIX_LDFLAGS = "-lfontconfig -lfreetype";
     };
   });
 
   ggiraph = prev.ggiraph.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libpng.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libpng.dev ];
     preInstall = (old.preInstall or "") + "export HOME=$TMPDIR";
   });
 
   git2r = prev.git2r.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      zlib.dev
-      openssl.dev
-      libssh2.dev
-      libgit2
-      pkg-config
-    ]);
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        zlib.dev
+        openssl.dev
+        libssh2.dev
+        libgit2
+        pkg-config
+      ]);
   });
 
   gmp = prev.gmp.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.gmp.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.gmp.dev ];
   });
 
   gsl = throw "gsl: missing: gsl";
 
   gert = prev.gert.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libgit2 ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libgit2 ];
   });
 
   haven = prev.haven.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.zlib.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.zlib.dev ];
   });
 
   httpuv = prev.httpuv.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.zlib.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.zlib.dev ];
     preConfigure = ''
       patchShebangs configure
     '';
   });
 
   imager = prev.imager.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libx11.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libx11.dev ];
   });
 
   jpeg = prev.jpeg.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libjpeg.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libjpeg.dev ];
   });
 
   jqr = prev.jqr.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.jq.dev ];
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.jq.out ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.jq.dev ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.jq.out ];
     preConfigure = ''
       patchShebangs configure
     '';
   });
 
   leidenAlg = prev.leidenAlg.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.gmp.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.gmp.dev ];
   });
 
   lwgeom = throw "lwgeom: missing: proj, geos";
@@ -150,9 +169,10 @@ in
   magick = throw "magick: missing: imagemagick (null in corepkgs)";
 
   ModelMetrics = prev.ModelMetrics.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [])
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
       ++ lib.optional stdenv.hostPlatform.isDarwin pkgs.llvmPackages.openmp;
-    env = (old.env or {}) // {
+    env = (old.env or { }) // {
       NIX_CFLAGS_COMPILE =
         (old.env.NIX_CFLAGS_COMPILE or "") + lib.optionalString stdenv.hostPlatform.isDarwin " -fopenmp";
     };
@@ -169,7 +189,7 @@ in
   odbc = throw "odbc: missing: unixODBC (null in corepkgs)";
 
   pak = prev.pak.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.curl.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.curl.dev ];
     preConfigure = ''
       patchShebangs configure
       patchShebangs src/library/curl/configure
@@ -184,29 +204,29 @@ in
   pbdMPI = throw "pbdMPI: missing: mpi (null in corepkgs)";
 
   pbdZMQ = prev.pbdZMQ.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [])
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
       ++ [ pkgs.pkg-config ]
       ++ lib.optionals stdenv.hostPlatform.isDarwin [ pkgs.which ];
-    buildInputs = (old.buildInputs or [])
-      ++ [ pkgs.zeromq ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.zeromq ];
   });
 
   pdftools = throw "pdftools: missing: poppler (null in corepkgs)";
 
   phytools = prev.phytools.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.which ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.which ];
   });
 
   PKI = prev.PKI.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.openssl.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.openssl.dev ];
   });
 
   png = prev.png.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libpng.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libpng.dev ];
   });
 
   protolite = prev.protolite.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.protobuf ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.protobuf ];
     preConfigure = ''
       patchShebangs configure
     '';
@@ -217,12 +237,12 @@ in
   RcppZiggurat = throw "RcppZiggurat: missing: gsl";
 
   redux = prev.redux.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.hiredis ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.hiredis ];
   });
 
   reprex = prev.reprex.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.which ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.which ];
   });
 
   rgdal = throw "rgdal: missing: proj";
@@ -234,17 +254,19 @@ in
   rjags = throw "rjags: missing: jags";
 
   rJava = prev.rJava.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      zlib
-      bzip2.dev
-      icu
-      xz.dev
-      zstd.dev
-      pcre.dev
-      java
-      libzip
-      libdeflate
-    ]);
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        zlib
+        bzip2.dev
+        icu
+        xz.dev
+        zstd.dev
+        pcre.dev
+        java
+        libzip
+        libdeflate
+      ]);
     preConfigure = ''
       export JAVA_CPPFLAGS=-I${pkgs.java}/include/
       export JAVA_HOME=${pkgs.java}
@@ -256,10 +278,12 @@ in
   });
 
   Rmpfr = prev.Rmpfr.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      gmp
-      mpfr.dev
-    ]);
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        gmp
+        mpfr.dev
+      ]);
     configureFlags = [
       "--with-mpfr-include=${pkgs.mpfr.dev}/include"
     ];
@@ -276,11 +300,13 @@ in
   RPostgreSQL = throw "RPostgreSQL: missing: libpq";
 
   RProtoBuf = prev.RProtoBuf.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
-    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
-      protobuf
-      (lib.getDev abseil-cpp)
-    ]);
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    buildInputs =
+      (old.buildInputs or [ ])
+      ++ (with pkgs; [
+        protobuf
+        (lib.getDev abseil-cpp)
+      ]);
     configureFlags = [ "ac_cv_prog_cxx_cxx11=" ];
   });
 
@@ -289,11 +315,13 @@ in
   runjags = throw "runjags: missing: jags";
 
   s2 = prev.s2.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
-    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
-      abseil-cpp
-      openssl.dev
-    ]);
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    buildInputs =
+      (old.buildInputs or [ ])
+      ++ (with pkgs; [
+        abseil-cpp
+        openssl.dev
+      ]);
     preConfigure = ''
       substituteInPlace "configure" \
         --replace-fail "absl_s2" "absl_flags absl_check"
@@ -301,45 +329,51 @@ in
   });
 
   seqinr = prev.seqinr.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.zlib.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.zlib.dev ];
   });
 
   sf = throw "sf: missing: proj, geos";
 
   showtext = prev.showtext.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      zlib
-      libpng
-      icu
-      freetype.dev
-    ]);
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        zlib
+        libpng
+        icu
+        freetype.dev
+      ]);
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pkg-config ];
   });
 
   stringi = prev.stringi.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.icu.dev ];
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.icu.dev ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pkg-config ];
   });
 
   svglite = prev.svglite.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libpng.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libpng.dev ];
   });
 
   sysfonts = prev.sysfonts.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      zlib
-      libpng
-      freetype.dev
-    ]);
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        zlib
+        libpng
+        freetype.dev
+      ]);
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pkg-config ];
   });
 
   systemfonts = prev.systemfonts.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      fontconfig.dev
-      freetype.dev
-    ]);
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        fontconfig.dev
+        freetype.dev
+      ]);
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pkg-config ];
     preConfigure = "patchShebangs configure";
   });
 
@@ -348,27 +382,31 @@ in
   tesseract = throw "tesseract: missing: tesseract, leptonica";
 
   textshaping = prev.textshaping.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
-    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
-      harfbuzz.dev
-      freetype.dev
-      fribidi
-      libpng
-    ]);
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    buildInputs =
+      (old.buildInputs or [ ])
+      ++ (with pkgs; [
+        harfbuzz.dev
+        freetype.dev
+        fribidi
+        libpng
+      ]);
     env = {
       NIX_LDFLAGS = "-lfribidi -lharfbuzz";
     };
   });
 
   tiff = prev.tiff.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libtiff.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libtiff.dev ];
   });
 
   tkrplot = prev.tkrplot.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with pkgs; [
-      libx11
-      tk.dev
-    ]);
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
+      ++ (with pkgs; [
+        libx11
+        tk.dev
+      ]);
   });
 
   topicmodels = throw "topicmodels: missing: gsl";
@@ -378,18 +416,19 @@ in
   units = throw "units: missing: udunits";
 
   vdiffr = prev.vdiffr.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.libpng.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.libpng.dev ];
   });
 
   webp = prev.webp.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.libwebp ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.libwebp ];
   });
 
   XML = throw "XML: missing: xmlsec";
 
   xml2 = prev.xml2.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [])
+    nativeBuildInputs =
+      (old.nativeBuildInputs or [ ])
       ++ [ pkgs.libxml2.dev ]
       ++ lib.optionals stdenv.hostPlatform.isDarwin [ pkgs.perl ];
     preConfigure = ''
@@ -401,8 +440,9 @@ in
   qqconf = throw "qqconf: missing: fftw";
 
   ragg = prev.ragg.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
-    buildInputs = (old.buildInputs or [])
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    buildInputs =
+      (old.buildInputs or [ ])
       ++ (with pkgs; [
         freetype.dev
         libpng.dev
@@ -420,26 +460,26 @@ in
   # --------------------------------------------------------------------------
 
   bigmemory = prev.bigmemory.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or [])
-      ++ lib.optionals stdenv.hostPlatform.isLinux [ pkgs.libuuid.dev ];
+    buildInputs =
+      (old.buildInputs or [ ]) ++ lib.optionals stdenv.hostPlatform.isLinux [ pkgs.libuuid.dev ];
   });
 
   fs = prev.fs.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.libuv ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.libuv ];
   });
 
   gaston = prev.gaston.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.zlib.dev ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.zlib.dev ];
   });
 
   igraph = throw "igraph: missing: glpk";
 
   openssl = prev.openssl.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.pkg-config ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.pkg-config ];
     preConfigure = ''
       patchShebangs configure
     '';
-    env = (old.env or {}) // {
+    env = (old.env or { }) // {
       PKGCONFIG_CFLAGS = "-I${pkgs.openssl.dev}/include";
       PKGCONFIG_LIBS = "-Wl,-rpath,${lib.getLib pkgs.openssl}/lib -L${lib.getLib pkgs.openssl}/lib -lssl -lcrypto";
     };
@@ -452,25 +492,29 @@ in
   PROJ = throw "PROJ: missing: proj";
 
   qpdf = prev.qpdf.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
-      libjpeg.dev
-      zlib.dev
-    ]);
+    buildInputs =
+      (old.buildInputs or [ ])
+      ++ (with pkgs; [
+        libjpeg.dev
+        zlib.dev
+      ]);
   });
 
   RcppAlgos = prev.RcppAlgos.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.gmp.dev ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.gmp.dev ];
   });
 
   rgl = prev.rgl.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
-      libGLU
-      libGL
-      libx11.dev
-      freetype.dev
-      libpng.dev
-    ]);
-    env = (old.env or {}) // {
+    buildInputs =
+      (old.buildInputs or [ ])
+      ++ (with pkgs; [
+        libGLU
+        libGL
+        libx11.dev
+        freetype.dev
+        libpng.dev
+      ]);
+    env = (old.env or { }) // {
       RGL_USE_NULL = "true";
     };
   });
@@ -484,29 +528,33 @@ in
   spaMM = throw "spaMM: missing: gsl";
 
   tcltk2 = prev.tcltk2.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
-      tcl
-      tk
-    ]);
+    buildInputs =
+      (old.buildInputs or [ ])
+      ++ (with pkgs; [
+        tcl
+        tk
+      ]);
   });
 
   tikzDevice = prev.tikzDevice.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ (with pkgs; [
-      which
-      texliveMedium
-    ]);
+    buildInputs =
+      (old.buildInputs or [ ])
+      ++ (with pkgs; [
+        which
+        texliveMedium
+      ]);
   });
 
   gridGraphics = prev.gridGraphics.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.which ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.which ];
   });
 
   vcfR = prev.vcfR.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.zlib.dev ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.zlib.dev ];
   });
 
   writexl = prev.writexl.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.zlib.dev ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.zlib.dev ];
   });
 
   # --------------------------------------------------------------------------
@@ -588,7 +636,7 @@ in
   });
 
   OpenMx = prev.OpenMx.overrideAttrs (old: {
-    env = (old.env or {}) // {
+    env = (old.env or { }) // {
       NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-ignored-attributes";
     };
     preConfigure = ''
@@ -637,13 +685,13 @@ in
   });
 
   rstan = prev.rstan.overrideAttrs (old: {
-    env = (old.env or {}) // {
+    env = (old.env or { }) // {
       NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION";
     };
   });
 
   Rserve = prev.Rserve.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.openssl ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.openssl ];
     configureFlags = [
       "--with-server"
       "--with-client"
@@ -654,8 +702,8 @@ in
     preConfigure = ''
       patchShebangs configure
     '';
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
-    buildInputs = (old.buildInputs or []) ++ [ pkgs.libsodium.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.pkg-config ];
+    buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.libsodium.dev ];
   });
 
   V8 = throw "V8: missing: nodejs-slim_22";
@@ -665,7 +713,7 @@ in
   });
 
   websocket = prev.websocket.overrideAttrs (old: {
-    env = (old.env or {}) // {
+    env = (old.env or { }) // {
       PKGCONFIG_CFLAGS = "-I${pkgs.openssl.dev}/include";
       PKGCONFIG_LIBS = "-Wl,-rpath,${lib.getLib pkgs.openssl}/lib -L${lib.getLib pkgs.openssl}/lib -lssl -lcrypto";
     };
