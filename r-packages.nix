@@ -241,17 +241,17 @@ in
       xz.dev
       zstd.dev
       pcre.dev
-      jdk
+      java
       libzip
       libdeflate
     ]);
     preConfigure = ''
-      export JAVA_CPPFLAGS=-I${pkgs.jdk}/include/
-      export JAVA_HOME=${pkgs.jdk}
+      export JAVA_CPPFLAGS=-I${pkgs.java}/include/
+      export JAVA_HOME=${pkgs.java}
       substituteInPlace R/zzz.R.in \
         --replace-fail ".onLoad <- function(libname, pkgname) {" \
           ".onLoad <- function(libname, pkgname) {
-           Sys.setenv(\"JAVA_HOME\" = Sys.getenv(\"JAVA_HOME\", unset = \"${pkgs.jdk}\"))"
+           Sys.setenv(\"JAVA_HOME\" = Sys.getenv(\"JAVA_HOME\", unset = \"${pkgs.java}\"))"
     '';
   });
 
