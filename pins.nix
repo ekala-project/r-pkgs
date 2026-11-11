@@ -6,6 +6,6 @@
 
   lib = builtins.fetchGit {
     url = "https://github.com/ekala-project/nix-lib.git";
-    rev = "9acd37c8934331a3e53a099f8755101bc2a149e2";
+    rev = "548c00d7b27d7363b734e1cf9acb06136c1ee4cb";
   };
 }
