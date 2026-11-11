@@ -31,3 +31,15 @@ buildRPackage {
 ```
 
 The package will be automatically available in the R package scope.
+
+## Checks
+
+CI runs both of these on every pull request:
+
+```sh
+./ci/eval.sh       # every rPackages attribute must evaluate (aliases disabled)
+nix fmt . -- --ci  # formatting, using corepkgs' treefmt configuration
+```
+
+Pins live in `flake.lock`; `pins.nix` reads them, so update them with
+`nix flake update`.
